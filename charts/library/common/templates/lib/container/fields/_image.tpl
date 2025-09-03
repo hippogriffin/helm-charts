@@ -12,4 +12,8 @@ Image used by the container.
   {{- if and $imageRepo $imageTag -}}
     {{- printf "%s:%s" $imageRepo $imageTag -}}
   {{- end -}}
+
+  {{- if and $imageRepo $imageTag $imageDigest -}}
+    {{- printf "%s:%s" $imageRepo $imageTag $imageDigest -}}
+  {{- end -}}
 {{- end -}}
