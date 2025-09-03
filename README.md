@@ -70,4 +70,4 @@ repositories containing any application you might wish to run.
 
 ### 🔏 License
 
-See [LICENSE](https://github.com/bjw-s-labs/helm-charts/blob/main/LICENSE)
+See [LICENSE](https://github.com/hippogriffin/helm-charts/blob/main/LICENSE)

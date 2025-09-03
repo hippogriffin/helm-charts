@@ -22,4 +22,4 @@ annotations:
         - name: Upgrade notes
           url: https://hippogriffin.github.io/helm-charts/docs/app-template/upgrade-instructions/
         - name: Detailed release notes
-          url: https://github.com/bjw-s-labs/helm-charts/releases/tag/common-4.2.0
+          url: https://github.com/hippogriffin/helm-charts/releases/tag/common-4.2.0

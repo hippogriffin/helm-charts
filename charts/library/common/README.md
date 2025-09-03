@@ -6,7 +6,7 @@ Function library for Helm charts
 
 ## Source Code
 
-- <https://github.com/bjw-s-labs/helm-charts>
+- <https://github.com/hippogriffin/helm-charts>
 
 ## Requirements
 
@@ -43,14 +43,14 @@ Read through the [values.yaml](./values.yaml) file. It has several commented out
 
 ## Values
 
-**Important**: When deploying an application Helm chart you can add more values from the common library chart [here](https://github.com/bjw-s-labs/helm-charts/tree/main/charts/library/common/values.yaml)
+**Important**: When deploying an application Helm chart you can add more values from the common library chart [here](https://github.com/hippogriffin/helm-charts/tree/main/charts/library/common/values.yaml)
 
-These values will be validated by a JSON schema which can be found [here](https://github.com/bjw-s-labs/helm-charts/tree/main/charts/library/common/values.schema.json)
+These values will be validated by a JSON schema which can be found [here](https://github.com/hippogriffin/helm-charts/tree/main/charts/library/common/values.schema.json)
 
 ## Support
 
 - See the [Docs](http://hippogriffin.github.io/helm-charts/docs/)
-- Open an [issue](https://github.com/bjw-s-labs/helm-charts/issues/new/choose)
+- Open an [issue](https://github.com/hippogriffin/helm-charts/issues/new/choose)
 - Join the home-operations [Discord](https://discord.gg/home-operations) community
 
 ---

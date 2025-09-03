@@ -30,7 +30,7 @@ helm install bjw-s app-template -f values.yaml
 
 ```bash
 # Install the chart
-helm install oci://ghcr.io/bjw-s-labs/helm/app-template -f values.yaml
+helm install oci://ghcr.io/hippogriffin/helm/app-template -f values.yaml
 ```
 
 ## Configuration
@@ -45,7 +45,7 @@ Upgrade instructions can be found in the [documentation](https://hippogriffin.gi
 ## Support
 
 - See the [Docs](http://hippogriffin.github.io/helm-charts/docs/)
-- Open an [issue](https://github.com/bjw-s-labs/helm-charts/issues/new/choose)
+- Open an [issue](https://github.com/hippogriffin/helm-charts/issues/new/choose)
 - Join the home-operations [Discord](https://discord.gg/home-operations) community
 
 ---

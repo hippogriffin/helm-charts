@@ -7,8 +7,8 @@ site_url: https://hippogriffin.github.io/helm-charts/
 site_author: bjw-s
 
 # Repository
-repo_name: bjw-s-labs/helm-charts
-repo_url: https://github.com/bjw-s-labs/helm-charts
+repo_name: hippogriffin/helm-charts
+repo_url: https://github.com/hippogriffin/helm-charts
 
 # Configuration
 docs_dir: ../../docs
