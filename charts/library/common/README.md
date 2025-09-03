@@ -32,10 +32,10 @@ Include this chart as a dependency in your `Chart.yaml` e.g.
 dependencies:
   - name: common
     version: 4.2.0
-    repository: https://bjw-s-labs.github.io/helm-charts/
+    repository: https://hippogriffin.github.io/helm-charts/
 ```
 
-For more information, take a look at the [Docs](http://bjw-s-labs.github.io/helm-charts/docs/common-library/introduction/).
+For more information, take a look at the [Docs](http://hippogriffin.github.io/helm-charts/docs/common-library/introduction/).
 
 ## Configuration
 
@@ -49,7 +49,7 @@ These values will be validated by a JSON schema which can be found [here](https:
 
 ## Support
 
-- See the [Docs](http://bjw-s-labs.github.io/helm-charts/docs/)
+- See the [Docs](http://hippogriffin.github.io/helm-charts/docs/)
 - Open an [issue](https://github.com/bjw-s-labs/helm-charts/issues/new/choose)
 - Join the home-operations [Discord](https://discord.gg/home-operations) community
 

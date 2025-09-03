@@ -26,7 +26,7 @@ This repo is **not** intended to be a replacement for any of the large collectio
 The Helm repository can be installed as follows:
 
 ```console
-helm repo add bjw-s https://bjw-s-labs.github.io/helm-charts
+helm repo add bjw-s https://hippogriffin.github.io/helm-charts
 ```
 
 You can then run `helm search repo bjw-s` to search the charts.
@@ -35,7 +35,7 @@ You can then run `helm search repo bjw-s` to search the charts.
 
 ### 📖 Docs
 
-The documentation that goes along with this repo can be found [over here](https://bjw-s-labs.github.io/helm-charts/).
+The documentation that goes along with this repo can be found [over here](https://hippogriffin.github.io/helm-charts/).
 
 ---
 

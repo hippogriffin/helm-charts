@@ -10,7 +10,7 @@
       ],
       datasourceTemplate: "helm",
       versioningTemplate: "semver",
-      registryUrlTemplate: "https://bjw-s-labs.github.io/helm-charts"
+      registryUrlTemplate: "https://hippogriffin.github.io/helm-charts"
     },
   ],
 }
