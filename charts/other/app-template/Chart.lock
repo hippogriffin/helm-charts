@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: https://hippogriffin.github.io/helm-charts
+  version: 4.2.1
+digest: sha256:79ee545c343b065f743602bd5d7929ec16d91d8d3ff8584abd7364a13e11bf00
+generated: "2025-09-04T18:39:37.247732093+01:00"
