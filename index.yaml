@@ -12,14 +12,14 @@ entries:
             - name: Detailed release notes
               url: https://github.com/hippogriffin/helm-charts/releases/tag/common-4.2.1
     apiVersion: v2
-    created: "2025-07-28T13:45:56.225341351Z"
+    created: "2025-09-04T17:42:58.902300218Z"
     dependencies:
     - name: common
       repository: https://hippogriffin.github.io/helm-charts
       version: 4.2.1
     description: A common powered chart template. This can be useful for small projects
       that don't have their own chart.
-    digest: 30918c77f75ad522975fc2485e29c66acbc88fabbc263c9dbed1d3631219cf0d
+    digest: 1d1bad5182e6ba38a2f9b3815bb9ff328fe043bec7612921925075706af9456f
     kubeVersion: '>=1.28.0-0'
     maintainers:
     - email: me@bjw-s.dev
@@ -30,4 +30,47 @@ entries:
     urls:
     - https://hippogriffin.github.io/helm-charts/other/app-template-4.2.1.tgz
     version: 4.2.1
-generated: "2025-07-28T13:45:55.86159899Z"
+  common:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: added
+          description: |-
+            Allow Helm templating for existingClaim field in persistence items.
+        - kind: added
+          description: |-
+            Allow Helm templating for subPath and Path fields in persistence items.
+        - kind: added
+          description: |-
+            Allow mounting of container images as persistence items in Kubernetes >= 1.33.
+          links:
+            - name: Kubernetes documentation
+              url: https://kubernetes.io/docs/concepts/storage/volumes/#image
+        - kind: added
+          description: |-
+            Allow configuring a portRange instead of a single port in Services.
+        - kind: fixed
+          description: |-
+            Fixed advancedMounts validation to not fail when persistence item is disabled.
+        - kind: fixed
+          description: |-
+            Allow probes to be configured when no services are enabled.
+    apiVersion: v2
+    created: "2025-09-04T17:42:58.896967919Z"
+    description: Function library for Helm charts
+    digest: df8ec3eff5774d967860324e4a0d69e72f41ab10ce0caa58b4e3c4e951549310
+    home: https://github.com/hippogriffin/helm-charts/tree/gh-pages/charts/library/common
+    keywords:
+    - common
+    - library
+    kubeVersion: '>=1.28.0-0'
+    maintainers:
+    - email: me@bjw-s.dev
+      name: bjw-s
+    name: common
+    sources:
+    - https://github.com/hippogriffin/helm-charts
+    type: library
+    urls:
+    - https://hippogriffin.github.io/helm-charts/library/common-4.2.1.tgz
+    version: 4.2.1
+generated: "2025-09-04T17:42:58.892790704Z"
