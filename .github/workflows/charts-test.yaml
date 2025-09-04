@@ -1,0 +1,173 @@
+---
+name: "Charts: Test (Reusable)"
+
+on:
+  workflow_call:
+    inputs:
+      charts:
+        description: >
+          Json encoded list of Helm charts to release. Defaults to releasing everything.
+        default: "[]"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  install-chart:
+    name: Install chart
+    runs-on: ubuntu-24.04
+    if: ${{ inputs.charts != '[]' && inputs.charts != '' }}
+    strategy:
+      matrix:
+        chart: ${{ fromJSON(inputs.charts) }}
+        k8s_version:
+          - "v1.28.15"
+          - "v1.29.13"
+          - "v1.30.11"
+          - "v1.31.7"
+          - "v1.32.3"
+          - "v1.33.0"
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+
+      - name: Validate prerequisite folders
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          CHART_TYPE=$(yq '.type // "application"' Chart.yaml)
+          if [[ ("${CHART_TYPE}" == "library") && (! -d "test-chart") ]]; then
+            echo "Library charts require a \"test-chart\" directory to run tests"
+            exit 1
+          fi
+
+      - name: Install kubectl matching k8s version
+        uses: yokawasa/action-setup-kube-tools@9e25a4277af127b60011c95b6ed2da7e3b3613b1 # v0.11.2
+        with:
+          setup-tools: |
+            kubectl
+          kubectl: "${{ matrix.k8s_version }}"
+
+      - name: Install Mise and required tools
+        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
+
+      - name: Create k3d cluster
+        uses: nolar/setup-k3d-k3s@293b8e5822a20bc0d5bcdd4826f1a665e72aba96 # v1.0.9
+        with:
+          version: ${{ matrix.k8s_version }}
+
+      - name: Remove node taints
+        run: |
+          kubectl taint --all=true nodes node.cloudprovider.kubernetes.io/uninitialized- || true
+
+      - name: Dereference JSON schema
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@4c03d934347b47655aebab248a5e17431893f7e1
+        with:
+          schemaFile: "charts/${{ matrix.chart }}/values.schema.json"
+          outputFile: "charts/${{ matrix.chart }}/values.schema.json"
+          allowFileNotFound: true
+
+      - name: Always assume in-repo common library
+        env:
+          COMMON_LIBRARY_LOCATION: ${{ github.workspace }}/charts/library/common
+        working-directory: charts/${{ matrix.chart }}
+        run: |
+          yq -i '. |= .dependencies |= map(select(.name == "common" and .repository == "https://hippogriffin.github.io/helm-charts").version = ">0.0.0-0")' Chart.yaml
+          yq -i '. |= .dependencies |= map(select(.name == "common" and .repository == "https://hippogriffin.github.io/helm-charts").repository = "file://" + strenv(COMMON_LIBRARY_LOCATION))' Chart.yaml
+          echo "::group::Modified Chart.yaml"
+          cat Chart.yaml
+          echo "::endgroup::"
+
+      - name: Run chart-testing (install)
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          if [ -d "test-chart" ]; then
+            cd "test-chart"
+          fi
+
+          ct install --config "${GITHUB_WORKSPACE}/.ci/ct/ct.yaml" --charts .
+
+  install_success:
+    needs:
+      - install-chart
+    if: ${{ !cancelled() }}
+    name: Install successful
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix status
+        if: >-
+          ${{
+              (inputs.chartsToTest != '' && inputs.chartsToTest != '[]') &&
+              contains(needs.*.result, 'failure')
+          }}
+        run: exit 1
+
+  unittest-chart:
+    name: Unit-test chart
+    runs-on: ubuntu-24.04
+    if: ${{ inputs.charts != '[]' && inputs.charts != '' }}
+    strategy:
+      matrix:
+        chart: ${{ fromJSON(inputs.charts) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+
+      - name: Validate prerequisite folders
+        working-directory: "charts/${{ matrix.chart }}"
+        run: |
+          CHART_TYPE=$(yq '.type // "application"' Chart.yaml)
+          if [[ ("${CHART_TYPE}" == "library") && (! -d "test-chart") ]]; then
+            echo "Library charts require a \"test-chart\" directory to run tests"
+            exit 1
+          fi
+
+      - name: Install Mise and required tools
+        uses: jdx/mise-action@5ac50f778e26fac95da98d50503682459e86d566 # v3.2.0
+
+      - name: Dereference JSON schema
+        uses: bjw-s-labs/helm-charts-actions/dereference-json-schema@4c03d934347b47655aebab248a5e17431893f7e1
+        with:
+          schemaFile: "charts/${{ matrix.chart }}/values.schema.json"
+          outputFile: "charts/${{ matrix.chart }}/values.schema.json"
+          allowFileNotFound: true
+
+      - name: Run tests
+        working-directory: "charts/${{ matrix.chart }}"
+        env:
+          MATRIX_CHART: ${{ matrix.chart }}
+        run: |
+          if [[ -d "test-chart" ]]; then
+            cd "test-chart"
+          fi
+
+          if [[ ! -d "unittests" ]]; then
+            echo "No unit tests found for chart ${MATRIX_CHART}"
+            exit 0
+          fi
+
+          helm plugin install https://github.com/helm-unittest/helm-unittest.git
+          helm dep update
+          helm unittest -f "unittests/**/*_test.yaml" .
+
+  unittest_success:
+    needs:
+      - unittest-chart
+    if: ${{ !cancelled() }}
+    name: Unittest successful
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix status
+        if: >-
+          ${{
+              (inputs.chartsToTest != '' && inputs.chartsToTest != '[]') &&
+              contains(needs.*.result, 'failure')
+          }}
+        run: exit 1
