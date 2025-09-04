@@ -164,6 +164,8 @@ jobs:
       deployGhPages: true
 
   release-other-charts:
+    environment:
+      name: github-pages
     name: Release other charts
     needs:
       - prepare
