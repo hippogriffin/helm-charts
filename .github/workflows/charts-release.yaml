@@ -191,5 +191,4 @@ jobs:
       publishToGhPages: true
       publishToOciRegistry: true
       deployGhPages: true
-      environment:
-        name: github-pages
+      environment: github-pages
