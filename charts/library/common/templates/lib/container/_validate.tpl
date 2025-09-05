@@ -7,7 +7,7 @@ Validate container values
   {{- $containerObject := .containerObject -}}
 
   {{- if not (kindIs "map" $containerObject.image)  -}}
-    {{- fail (printf "Image required to be a dictionary with repository and tag fields. (controller %s, container %s,container %s)" $controllerObject.identifier $containerObject.identifier  $containerObject.identifier) }}
+    {{- fail (printf "Image required to be a dictionary with repository and tag fields. (controller %s, container %s)" $controllerObject.identifier $containerObject.identifier) }}
   {{- end -}}
 
   {{- if empty (dig "image" "repository" nil $containerObject) -}}
@@ -15,8 +15,6 @@ Validate container values
   {{- end -}}
 
   {{- if empty (dig "image" "tag" nil $containerObject) -}}
-      {{- if empty (dig "image" "digest" nil $containerObject) -}}
-        {{- fail (printf "No image tag specified for container. (controller %s, container %s)" $controllerObject.identifier $containerObject.identifier) }}
-      {{- end -}}
+    {{- fail (printf "No image tag specified for container. (controller %s, container %s)" $controllerObject.identifier $containerObject.identifier) }}
   {{- end -}}
 {{- end -}}
