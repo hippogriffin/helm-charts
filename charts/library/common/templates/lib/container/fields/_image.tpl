@@ -11,10 +11,10 @@ Image used by the container.
   {{- $imageDigest := $containerObject.image.digest -}}
 
   {{- if and $imageRepo $imageDigest -}}
-    {{- printf "%s:%s" $imageRepo $imageDigest -}}
+    {{- printf "%s@%s" $imageRepo $imageDigest -}}
   {{- else if and $imageRepo $imageTag -}}
     {{- printf "%s:%s" $imageRepo $imageTag -}}
   {{- else if and $imageRepo $imageTag $imageDigest -}}
-    {{- printf "%s:%s" $imageRepo $imageDigest -}}
+    {{- printf "%s@%s" $imageRepo $imageDigest -}}
   {{- end -}}
 {{- end -}}
