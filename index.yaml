@@ -12,7 +12,7 @@ entries:
             - name: Detailed release notes
               url: https://github.com/hippogriffin/helm-charts/releases/tag/common-4.2.1
     apiVersion: v2
-    created: "2025-09-04T18:55:51.042096069Z"
+    created: "2025-09-05T17:35:16.286813214Z"
     dependencies:
     - name: common
       repository: https://hippogriffin.github.io/helm-charts
@@ -55,9 +55,9 @@ entries:
           description: |-
             Allow probes to be configured when no services are enabled.
     apiVersion: v2
-    created: "2025-09-04T18:55:51.038705626Z"
+    created: "2025-09-05T17:35:16.283627857Z"
     description: Function library for Helm charts
-    digest: e3699ef8b63506cfb9f91d73edb09d8558d96d2a91ffd7dd544188d455be3de5
+    digest: 3aab3316be37fb8336d908ea06a37ed0e8ad98586c0b2a9c4eee9e58f4fc97ae
     home: https://github.com/hippogriffin/helm-charts/tree/gh-pages/charts/library/common
     keywords:
     - common
@@ -73,4 +73,4 @@ entries:
     urls:
     - https://hippogriffin.github.io/helm-charts/library/common-4.2.1.tgz
     version: 4.2.1
-generated: "2025-09-04T18:55:51.035037326Z"
+generated: "2025-09-05T17:35:16.270199053Z"
