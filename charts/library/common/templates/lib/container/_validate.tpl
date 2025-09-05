@@ -11,14 +11,12 @@ Validate container values
   {{- end -}}
 
   {{- if empty (dig "image" "repository" nil $containerObject) -}}
-    {{- fail (printf "No image repository specified for container. (controller %s, container %s,container %s)" $controllerObject.identifier $containerObject.identifier  $containerObject.identifier) }}
+    {{- fail (printf "No image repository specified for container. (controller %s, container %s)" $controllerObject.identifier $containerObject.identifier) }}
   {{- end -}}
 
   {{- if empty (dig "image" "tag" nil $containerObject) -}}
-    {{- fail (printf "No image tag specified for container. (controller %s, container %s,container %s)" $controllerObject.identifier $containerObject.identifier  $containerObject.identifier) }}
-  {{- end -}}
-
-  {{- if empty (dig "image" "digest" nil $containerObject) -}}
-    {{- fail (printf "No image digest specified for container. (controller %s, container %s,container %s)" $controllerObject.identifier $containerObject.identifier  $containerObject.identifier) }}
+      {{- if empty (dig "image" "digest" nil $containerObject) -}}
+        {{- fail (printf "No image tag specified for container. (controller %s, container %s)" $controllerObject.identifier $containerObject.identifier) }}
+      {{- end -}}
   {{- end -}}
 {{- end -}}
