@@ -12,14 +12,14 @@ entries:
             - name: Detailed release notes
               url: https://github.com/hippogriffin/helm-charts/releases/tag/common-4.2.1
     apiVersion: v2
-    created: "2025-09-05T17:35:16.286813214Z"
+    created: "2025-09-05T17:53:07.862435398Z"
     dependencies:
     - name: common
       repository: https://hippogriffin.github.io/helm-charts
       version: 4.2.1
     description: A common powered chart template. This can be useful for small projects
       that don't have their own chart.
-    digest: 653c88b4693eb404e9f39889e3212869365cc8cfb8cd82fe6018e4e595d5d5a7
+    digest: 72ff8e75cb4687b42ace6f6d106d079f8ce080036c18efe6f90db42bcd6aa66b
     kubeVersion: '>=1.28.0-0'
     maintainers:
     - email: me@bjw-s.dev
@@ -55,9 +55,9 @@ entries:
           description: |-
             Allow probes to be configured when no services are enabled.
     apiVersion: v2
-    created: "2025-09-05T17:35:16.283627857Z"
+    created: "2025-09-05T17:53:07.860325637Z"
     description: Function library for Helm charts
-    digest: 3aab3316be37fb8336d908ea06a37ed0e8ad98586c0b2a9c4eee9e58f4fc97ae
+    digest: 67b7bcbe8f472ff8b1a4b1038d5e28ac83d144b4ded0d34c184e66b3c8e45b6c
     home: https://github.com/hippogriffin/helm-charts/tree/gh-pages/charts/library/common
     keywords:
     - common
@@ -73,4 +73,4 @@ entries:
     urls:
     - https://hippogriffin.github.io/helm-charts/library/common-4.2.1.tgz
     version: 4.2.1
-generated: "2025-09-05T17:35:16.270199053Z"
+generated: "2025-09-05T17:53:07.855564425Z"
